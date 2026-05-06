@@ -24,7 +24,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Pytest
-        run: pytest tests/test_api.py
+        run: PYTHONPATH=. pytest tests/test_api.py
 
       - name: Deploy to Hugging Face Spaces
         if: success()
