@@ -1,3 +1,7 @@
+git add README.md
+git commit -m "Fix Hugging Face configuration in README"
+git push origin main
+
 # High-Throughput Image Classification API (EfficientNet-B0)
 
 This project provides an optimized Image Classification API using FastAPI and a dynamically quantized EfficientNet-B0 ONNX model.
