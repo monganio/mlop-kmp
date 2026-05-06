@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -33,5 +33,18 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git remote add space https://user:$HF_TOKEN@huggingface.co/spaces/monganio/mlop
-          git push space main --force
+          # 1. ตั้งค่า Git เบื้องต้น
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          
+          # 2. ทำลายประวัติเก่าที่มีไฟล์ขนาดใหญ่ทิ้ง (ลบ .git folder ของ runner)
+          rm -rf .git
+          
+          # 3. เริ่มนับหนึ่งใหม่ (สร้างประวัติ Git ใหม่ที่มีเฉพาะไฟล์ปัจจุบัน)
+          git init
+          git add .
+          git commit -m "Deploy optimized model: Quantized version"
+          
+          # 4. บังคับส่งงานไปที่ Hugging Face (จาก master ของ runner ไปที่ main ของ Space)
+          git remote add space https://monganio:$HF_TOKEN@huggingface.co/spaces/monganio/mlop
+          git push space master:main --force
