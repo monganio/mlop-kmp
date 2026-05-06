@@ -1,0 +1,6 @@
+[
+  "tests/test_api.py::test_health_check",
+  "tests/test_api.py::test_predict_endpoint_corrupted_image",
+  "tests/test_api.py::test_predict_endpoint_invalid_type",
+  "tests/test_api.py::test_predict_endpoint_success"
+]
