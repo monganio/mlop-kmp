@@ -33,12 +33,11 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          # 1. ติดตั้ง Library สำหรับอัปโหลด
-          pip install huggingface_hub
+          # 1. ติดตั้ง/อัปเดตเครื่องมือเวอร์ชันล่าสุด
+          pip install -U huggingface_hub
           
-          # 2. ใช้ CLI สั่งอัปโหลดไฟล์ทั้งหมดในโปรเจคขึ้น Space โดยตรง
-          # (วิธีนี้จะข้ามระบบ Git Hook ที่คอยบล็อกไฟล์ Binary ของคุณครับ)
-          huggingface-cli upload monganio/mlop . . --repo-type=space --token=$HF_TOKEN
+          # 2. ใช้คำสั่ง hf ตามที่ระบบแนะนำ (อัปโหลดโฟลเดอร์ปัจจุบันไปยัง Space)
+          hf upload monganio/mlop . . --repo-type=space --token=$HF_TOKEN
           
           # 3. เริ่มนับหนึ่งใหม่ (สร้างประวัติ Git ใหม่ที่มีเฉพาะไฟล์ปัจจุบัน)
           git init
