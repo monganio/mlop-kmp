@@ -33,17 +33,5 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          # 1. ติดตั้ง/อัปเดตเครื่องมือเวอร์ชันล่าสุด
           pip install -U huggingface_hub
-          
-          # 2. ใช้คำสั่ง hf ตามที่ระบบแนะนำ (อัปโหลดโฟลเดอร์ปัจจุบันไปยัง Space)
           hf upload monganio/mlop . . --repo-type=space --token=$HF_TOKEN
-          
-          # 3. เริ่มนับหนึ่งใหม่ (สร้างประวัติ Git ใหม่ที่มีเฉพาะไฟล์ปัจจุบัน)
-          git init
-          git add .
-          git commit -m "Deploy optimized model: Quantized version"
-          
-          # 4. บังคับส่งงานไปที่ Hugging Face (จาก master ของ runner ไปที่ main ของ Space)
-          git remote add space https://monganio:$HF_TOKEN@huggingface.co/spaces/monganio/mlop
-          git push space master:main --force
