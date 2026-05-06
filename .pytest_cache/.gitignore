@@ -1,8 +1,1 @@
-# Ignore the large original model (required by HF limit)
 models/model.onnx
-
-# Ignore Python cache and local environment
-__pycache__/
-.pytest_cache/
-.env
-venv/
